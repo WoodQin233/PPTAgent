@@ -1,6 +1,7 @@
-# NewAgent
+# PPTAgent
 
 文档驱动的 AI PPT 生成 Agent：输入一份文档，AI 自动完成大纲规划与版式设计，最终渲染输出 `.pptx` 演示文稿。
+ppt中的材料只使用文档内的内容。
 
 ## 功能特性
 
@@ -51,14 +52,19 @@ python App/cli.py
 ## 项目结构
 
 ```
-NewAgent/
-├── App/                  # 核心业务：解析、分析、生成、渲染
-│   ├── cli.py            # 交互式命令行入口
-│   ├── parser.py         # 文档解析
-│   ├── analyzer.py       # AI 大纲与布局生成
-│   ├── generator.py      # PPT 渲染
-│   ├── providers.py      # 多厂商客户端适配
-│   └── prompts.py        # 提示词管理模块
+PPTAgent/
+├── App/                  # 核心业务：解析、大纲、布局、渲染
+│   ├── cli.py            # 命令行入口
+│   ├── parser.py         # 文档解析（txt/docx/pdf）
+│   ├── analyzer.py       # AI 大纲与内容生成
+│   ├── client.py         # LLM 客户端门面
+│   ├── providers.py      # 厂商与协议适配
+│   ├── models.py         # 数据模型
+│   ├── generator.py      # PPTX 渲染
+│   ├── prompts.py        # 提示词加载
+│   ├── layout_engine/    # 布局引擎：原型选型、网格、编译
+│   ├── decoration/       # 装饰生成与放置
+│   └── validator/        # 校验、修复与质量报告
 ├── Prompts/              # 提示词 YAML 模板
 ├── Config/config.json    # 运行配置（厂商切换、模型参数）
 ├── Utils/                # 配置加载、日志、统计
